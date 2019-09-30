@@ -24,7 +24,7 @@ fi
 . "${SPARK_HOME}"/bin/load-spark-env.sh
 
 # Find the java binary
-RUNNER="$SIBYLLA_HOME/spark-domain/jdk8/bin/java"
+RUNNER="$SIBYLLA_HOME/3rd-party/spark-domain/jdk8/bin/java"
 
 # Find Spark jars.
 if [ -d "${SPARK_HOME}/jars" ]; then
