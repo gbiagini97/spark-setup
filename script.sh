@@ -20,6 +20,7 @@ ln -s $SIBYLLA_HOME/3d-party/spark-domain/spark-home/spark-2.4.4-bin-hadoop2.7 $
 # set spark to run with jdk8
 rm -f $SIBYLLA_HOME/3rd-party/spark-domain/spark/bin/spark-class
 wget -P $SIBYLLA_HOME/3d-party/spark-domain/spark/bin/ https://github.com/gbiagini97/spark-setup/releases/download/spark-class-1.0/spark-class 
+chmod a+x $SIBYLLA_HOME/3d-party/spark-domain/spark/bin/spark-class
 
 # configure spark-defaults with mongo-spark connector
 cp $SIBYLLA_HOME/3d-party/spark-domain/spark/conf/spark-defaults.conf.template $SIBYLLA_HOME/3d-party/spark-domain/spark/conf/spark-defaults.conf
