@@ -2,6 +2,7 @@
 
 apt update
 apt install wget 
+apt install vim
 cd /home
 
 mkdir sibylla
