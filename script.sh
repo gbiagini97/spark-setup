@@ -43,7 +43,7 @@ sleep 2
 
 # configure spark-defaults with mongo-spark connector
 cp spark/conf/spark-defaults.conf.template spark/conf/spark-defaults.conf
-echo "spark.jars.packages   org.mongodb.spark:mongo-spark-connector_2.12:2.4.1" >> spark/conf/spark-defaults.conf
+echo "\nspark.jars.packages   org.mongodb.spark:mongo-spark-connector_2.11:2.4.1\n spark.mongodb.input.partitioner MongoSinglePartitioner\n" >> spark/conf/spark-defaults.conf
 
 echo "UPDATED SPARK-DEFAULTS"
 sleep 2
