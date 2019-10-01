@@ -29,8 +29,9 @@ wget -P spark/bin/ https://github.com/gbiagini97/spark-setup/releases/download/s
 chmod a+x spark/bin/spark-class
 
 # configure spark-defaults with mongo-spark connector
+wget -P spark/jars https://repo1.maven.org/maven2/org/mongodb/mongodb-driver/3.10.2/mongodb-driver-3.10.2.jar
+wget -P spark/jars https://repo1.maven.org/maven2/org/mongodb/spark/mongo-spark-connector_2.12/2.4.1/mongo-spark-connector_2.12-2.4.1.jar
+
 cp spark/conf/spark-defaults.conf.template spark/conf/spark-defaults.conf
-echo "spark.jars.packages             org.mongodb.spark:mongo-spark-connector_2.11:2.4.1\nspark.mongodb.input.partitioner MongoSamplePartitioner" >>  spark/conf/spark-defaults.conf
-
-
+echo "spark.mongodb.input.partitioner MongoSamplePartitioner" >>  spark/conf/spark-defaults.conf
 
