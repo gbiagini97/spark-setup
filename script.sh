@@ -49,25 +49,42 @@ echo "spark.mongodb.input.partitioner MongoSinglePartitioner\n" >> spark/conf/sp
 echo "UPDATED SPARK-DEFAULTS"
 sleep 2
 
+# configure spark env
+cp spark/conf/spark-env.sh.template spark/conf/spark-env.sh
+echo "SPARK_MASTER_HOST=`hostname -i`" >> spark/conf/spark-env.sh
+echo "SPARK_MASTER_WEBUI_PORT=8181" >> spark/conf/spark-env.sh
+
+echo "UPDATED SPARK ENV"
+sleep 2
+
 # download and uncompress zeppelin
-wget -P $SIBYLLA_HOME/downloads/ http://it.apache.contactlab.it/zeppelin/zeppelin-0.8.2/zeppelin-0.8.2-bin-all.tgztar -xzvf $SIBYLLA_HOME/downloads/zeppelin-0.8.2-bin-all.tgz -C .
-ln -s zeppelin-0.8.2-bin-all zeppelin
+#wget -P $SIBYLLA_HOME/downloads/ http://it.apache.contactlab.it/zeppelin/zeppelin-0.8.2/zeppelin-0.8.2-bin-all.tgz
+#tar -xzvf $SIBYLLA_HOME/downloads/zeppelin-0.8.2-bin-all.tgz -C .
+#ln -s zeppelin-0.8.2-bin-all zeppelin
+
+wget -P $SIBYLLA_HOME/downloads/ http://mirror.nohup.it/apache/zeppelin/zeppelin-0.8.2/zeppelin-0.8.2-bin-netinst.tgz
+tar -xzvf $SIBYLLA_HOME/downloads/zeppelin-0.8.2-bin-netinst.tgz -C .
+ln -s zeppelin-0.8.2-bin-netinst zeppelin
+
 
 echo "ZEPPELIN DOWNLOADED"
 sleep 2
 
-# configure zeppelin
-
+# configure zeppelin runtime
 rm -f zeppelin/bin/common.sh
 wget -P zeppelin/bin/ https://github.com/gbiagini97/spark-setup/releases/download/spark-class-1.0/common.sh
 
+echo "ZEPPELIN RUNTIME CONFIGURERD"
+sleep 2
+
+# configure zeppelin env
 cp zeppelin/conf/zeppelin-env.sh.template zeppelin/conf/zeppelin-env.sh
-echo "export JAVA_HOME=\$SIBYLLA_HOME/3rd-party/spark-domain/jdk8" >> zeppelin/conf/zeppelin-env.sh
 echo "export SPARK_HOME=\$SIBYLLA_HOME/3rd-party/spark-domain/spark" >> zeppelin/conf/zeppelin-env.sh
 echo "export PYTHONPATH=\$SPARK_HOME/python:\$SPARK_HOME/python/lib/py4j-0.10.7-src.zip" >> zeppelin/conf/zeppelin-env.sh
 echo "export PATH=\$SPARK_HOME/python:\$SPARK_HOME/bin:\$PATH" >> zeppelin/conf/zeppelin-env.sh
-echo "export ZEPPELIN_PORT=8181" >> zeppelin/conf/zeppelin-env.sh
-echo "export MASTER='spark://`hostname`:7077'" >> zeppelin/conf/zeppelin-env.sh
+echo "export ZEPPELIN_ADDR=0.0.0.0" >> zeppelin/conf/zeppelin-env.sh
+echo "export ZEPPELIN_PORT=8282" >> zeppelin/conf/zeppelin-env.sh
+echo "export MASTER='spark://`hostname -i`:7077'" >> zeppelin/conf/zeppelin-env.sh
 echo "export ZEPPELIN_SPARK_MAXRESULT=5000" >> zeppelin/conf/zeppelin-env.sh
 
 echo "ZEPPELIN CONFIGURED"
