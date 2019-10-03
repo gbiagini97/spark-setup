@@ -57,6 +57,10 @@ echo "ZEPPELIN DOWNLOADED"
 sleep 2
 
 # configure zeppelin
+
+rm -f zeppelin/bin/common.sh
+wget -P zeppelin/bin/ https://github.com/gbiagini97/spark-setup/releases/download/spark-class-1.0/common.sh
+
 cp zeppelin/conf/zeppelin-env.sh.template zeppelin/conf/zeppelin-env.sh
 echo "export JAVA_HOME=\$SIBYLLA_HOME/3rd-party/spark-domain/jdk8" >> zeppelin/conf/zeppelin-env.sh
 echo "export SPARK_HOME=\$SIBYLLA_HOME/3rd-party/spark-domain/spark" >> zeppelin/conf/zeppelin-env.sh
