@@ -43,8 +43,28 @@ sleep 2
 
 # configure spark-defaults with mongo-spark connector
 cp spark/conf/spark-defaults.conf.template spark/conf/spark-defaults.conf
-echo "\nspark.jars.packages   org.mongodb.spark:mongo-spark-connector_2.11:2.4.1\n spark.mongodb.input.partitioner MongoSinglePartitioner\n" >> spark/conf/spark-defaults.conf
+echo "spark.jars.packages  org.mongodb.spark:mongo-spark-connector_2.11:2.4.1\n" >> spark/conf/spark-defaults.conf
+echo "spark.mongodb.input.partitioner MongoSinglePartitioner\n" >> spark/conf/spark-defaults.conf
 
 echo "UPDATED SPARK-DEFAULTS"
 sleep 2
 
+# download and uncompress zeppelin
+wget -P $SIBYLLA_HOME/downloads/ http://it.apache.contactlab.it/zeppelin/zeppelin-0.8.2/zeppelin-0.8.2-bin-all.tgztar -xzvf $SIBYLLA_HOME/downloads/zeppelin-0.8.2-bin-all.tgz -C .
+ln -s zeppelin-0.8.2-bin-all zeppelin
+
+echo "ZEPPELIN DOWNLOADED"
+sleep 2
+
+# configure zeppelin
+cp zeppelin/conf/zeppelin-env.sh.template zeppelin/conf/zeppelin-env.sh
+echo "export JAVA_HOME=\$SIBYLLA_HOME/3rd-party/spark-domain/jdk8" >> zeppelin/conf/zeppelin-env.sh
+echo "export SPARK_HOME=\$SIBYLLA_HOME/3rd-party/spark-domain/spark" >> zeppelin/conf/zeppelin-env.sh
+echo "export PYTHONPATH=\$SPARK_HOME/python:\$SPARK_HOME/python/lib/py4j-0.10.7-src.zip" >> zeppelin/conf/zeppelin-env.sh
+echo "export PATH=\$SPARK_HOME/python:\$SPARK_HOME/bin:\$PATH" >> zeppelin/conf/zeppelin-env.sh
+echo "export ZEPPELIN_PORT=8181" >> zeppelin/conf/zeppelin-env.sh
+echo "export MASTER='spark://`hostname`:7077'" >> zeppelin/conf/zeppelin-env.sh
+echo "export ZEPPELIN_SPARK_MAXRESULT=5000" >> zeppelin/conf/zeppelin-env.sh
+
+echo "ZEPPELIN CONFIGURED"
+sleep 2
