@@ -1,8 +1,5 @@
 #!/bin/sh
 
-#to be removed
-mkdir $SIBYLLA_HOME/downloads
-
 mkdir -p $SIBYLLA_HOME/3rd-party/spark-domain/
 cd $SIBYLLA_HOME/3rd-party/spark-domain
 
@@ -58,14 +55,9 @@ echo "UPDATED SPARK ENV"
 sleep 2
 
 # download and uncompress zeppelin
-#wget -P $SIBYLLA_HOME/downloads/ http://it.apache.contactlab.it/zeppelin/zeppelin-0.8.2/zeppelin-0.8.2-bin-all.tgz
-#tar -xzvf $SIBYLLA_HOME/downloads/zeppelin-0.8.2-bin-all.tgz -C .
-#ln -s zeppelin-0.8.2-bin-all zeppelin
-
 wget -P $SIBYLLA_HOME/downloads/ http://mirror.nohup.it/apache/zeppelin/zeppelin-0.8.2/zeppelin-0.8.2-bin-netinst.tgz
 tar -xzvf $SIBYLLA_HOME/downloads/zeppelin-0.8.2-bin-netinst.tgz -C .
 ln -s zeppelin-0.8.2-bin-netinst zeppelin
-
 
 echo "ZEPPELIN DOWNLOADED"
 sleep 2
